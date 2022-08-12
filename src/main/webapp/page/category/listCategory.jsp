@@ -44,7 +44,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
                 <c:forEach items="${categories}" var="category" varStatus="st">
                     <tr>
                         <td>${category.id}</td>
-                        <td>${category.name}</td>
+                        <td><a  href="listProduct?id=${category.id}">${category.name}</a> </td>
                         <td><a href="editCategory?id=${category.id}"><button type="button" class="btn btn-default btn-primary">编辑</button></a> </td>
                         <td><a href="deleteCategory?id=${category.id}"><button type="button" class="btn btn-default btn-danger">删除</button></a> </td>
                     </tr>
