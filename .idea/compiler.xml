@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="iweb_summer3" />
         <module name="d0811_jsp_demo" />
       </profile>
     </annotationProcessing>
