@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<input id="name" type="text" />
+<div id="checkResult"></div>
+</body>
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    //$.get 是$.ajax的简化版 专门负责发送get请求
+    $(function () {
+        $('#name').blur(function () {
+            let page = "/checkName";
+            let value = $(this).val();
+            $.get(
+                page,//请求url
+                {"name":value},//请求携带参数
+                function (result) {//响应函数
+                    $('#checkResult').html(result);
+                }
+            )
+        })
+
+    })
+
+
+
+    //jquery提供了4种发送ajax请求的方式
+    //$.ajax方式提交
+    // $(function () {
+    //     $("#name").keyup(function () {
+    //             //设置url
+    //         let page = "http://localhost/checkName";
+    //     //    获取input表单元素的value
+    //         let value = $(this).val();
+    //     //    进行ajax定义
+    //         $.ajax({
+    //             url:page,//请求路径
+    //             data:{"name":value},//请求所携带的参数名称和参数的值
+    //             //响应函数
+    //             //result参数类似于刚才的xmlhttp.responseText
+    //             //代表的时候你从后端接受到的响应内容
+    //             success:function (result) {
+    //                 //将获取到的响应内容进行填充
+    //                 $("#checkResult").html(result);
+    //             }
+    //         })
+    //     })
+    // })
+
+
+    // let xmlhttp;
+    // function check() {
+    //     let name = document.getElementById("name").value;
+    //     let url = 'http://localhost/checkName?name='+name;
+    //     xmlhttp = new XMLHttpRequest();//XHR对象 是原生js中定义的用来实现
+    //     //ajax的对象
+    //     //绑定响应函数 我们通过js向后端发送请求 后端返回响应的时候
+    //     //由ajax的响应函数来负责处理响应
+    //     xmlhttp.onreadystatechange = checkResult;
+    //     //定义请求的方式 请求访问的路径
+    //     xmlhttp.open("GET",url,true);
+    //     //发送ajax请求 send函数里面可以接受参数列表
+    //     //你的参数可以直接拼接在url里 也可以在进行请求发送的时候
+    //     //存放在send的参数里
+    //     xmlhttp.send(null);
+    // }
+    // //响应函数 负责对服务器的响应进行处理
+    // function checkResult() {
+    //     //readyState有多个不同的编码 每一个编码对应的是请求的情况
+    //     //0 请求未初始化
+    //     //1 服务器连接已经建立
+    //     //2 请求已经接受
+    //     //3 请求处理中
+    //     //4 请求已经完成 并且响应已经就绪
+    //     //xmlhttp.status 响应编码
+    //     if(xmlhttp.readyState==4 && xmlhttp.status==200){
+    //         //将获得的响应内容 通过js渲染到浏览器页面
+    //         // xmlhttp.responseText 指代的是ajax从服务器接受到的响应字符串
+    //         document.getElementById("checkResult").innerHTML=
+    //             xmlhttp.responseText;
+    //     }
+    //
+    // }
+</script>
+</html>
