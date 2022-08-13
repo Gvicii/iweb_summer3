@@ -31,9 +31,12 @@ public class C_AuthFilter implements Filter {
             return;
         }
         User user = (User)req.getSession().getAttribute("user");
-        if(user.getUsername()==null){
-            resp.sendRedirect("login.html");
-            return;
+        if(user!=null){
+            if(user.getUsername()!=null){
+                resp.sendRedirect("login.html");
+                return;
+        }
+
         }
         chain.doFilter(req,resp);
     }
