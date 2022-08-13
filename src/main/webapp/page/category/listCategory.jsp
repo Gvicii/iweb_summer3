@@ -23,6 +23,10 @@ pageEncoding="UTF-8" isELIgnored="false" %>
                     分类管理界面 <small>除了CRUD还有其他功能 但是 一会再说</small>
                 </h1>
             </div>
+            <div class="page-information">
+                欢迎你,尊贵的用户${user.username}
+                <a href="exitLogin">退出</a>
+            </div>
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
