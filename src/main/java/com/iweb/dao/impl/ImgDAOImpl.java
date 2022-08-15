@@ -19,10 +19,11 @@ import java.util.List;
 public class ImgDAOImpl implements ImgDAO {
     @Override
     public void add(Img img) {
-        String sql = "insert into img(url) values(?)";
+        String sql = "insert into img(url,pid) values(?,?)";
         try (Connection c = DBUtil.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setString(1, img.getUrl());
+            ps.setInt(2,img.getPid());
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();

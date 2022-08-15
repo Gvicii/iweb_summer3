@@ -35,7 +35,7 @@
                     <tr>
                         <td><img width="100px" height="100px" src="${i.url}" class="img-thumbnail"/></td>
                         <td>${p.name}</td>
-                        <td><a href="deleteImg?id=${i.id}">
+                        <td><a href="deleteImg?id=${i.id}&pid=${p.id}">
                             <button type="button" class="btn btn-default btn-danger">删除</button>
                         </a></td>
                     </tr>
