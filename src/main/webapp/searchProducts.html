@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+</head>
+<body>
+<button id="sender">获取所有商品</button>
+<div id="d1"></div>
+</body>
+<script>
+    $(function () {
+        $('#sender').click(function () {
+            let url = "searchProducts";
+            $.post(
+                url,
+
+                function (data) {
+                    //将响应中返回的字符串转换为json数组
+                    let products = $.parseJSON(data);
+                    //jquery的html方法每一次填充内容都会覆盖 原有的文本数据
+                    //在遍历products的时候 每一次先获取原有的内容
+                    //在原有内容基础上进行数据拼接 实现功能
+                    for (p of products) {
+                        let old = $('#d1').html();
+                        $('#d1').html(old+'商品id:'+p.id+' 商品名称:'+p.name+' 商品价格:'+p.price+' 商品库存'+p.stock+" 商品的分类id:"+p.cid+"<br/>");
+                    }
+                }
+            )
+        })
+    })
+</script>
+</html>

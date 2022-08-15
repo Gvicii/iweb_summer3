@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+</head>
+<body>
+请输入你想搜索的商品id:<input type="text" id="input1">
+<button id="sender">搜索</button>
+<div id="d1"></div>
+</body>
+<script>
+    $(function () {
+        $('#sender').click(function () {
+        //    获取表单的value属性
+            let value = $('#input1').val();
+        //    定义url
+            let url = "searchProduct";
+            $.post(
+                url,
+                {"value":value},
+                function (data) {
+                    //这里的data得到的其实是JSON格式的字符串 字符串内容如下
+                    // {
+                    //     "product":{
+                    //         "price":998,
+                    //         "name""冲水马桶",
+                    //         "id":1,
+                    //         "stock":20,
+                    //         "cid":2
+                    //     }
+                    // }
+                //    一会我们在后端会调用DAO获取对应的product对象
+                //后端查询到product对象之后 会将
+                //对象转换成JSON格式的字符串
+                //前端接受到这个JSON格式的字符串之后 需要将
+                //其还原成JS对象 方便jquery进行内容渲染
+                console.log(data);
+                console.log(typeof  data);
+                //将JSON格式的字符串 还原成js对象
+                let jsObject = JSON.parse(data);
+                console.log(jsObject);
+                console.log(typeof jsObject);
+                let id = jsObject.product.id;
+                let name = jsObject.product.name;
+                let price = jsObject.product.price;
+                let stock = jsObject.product.stock;
+                let cid = jsObject.product.cid;
+                //将数据渲染到html页面中
+                $('#d1').html('商品id:'+id+' 商品名称:'+name+' 商品价格:'+price+' 商品库存'+stock+" 商品的分类id:"+cid);
+                }
+            )
+        })
+    })
+</script>
+</html>

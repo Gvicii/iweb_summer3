@@ -11,21 +11,66 @@
 </body>
 <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 <script>
-    //$.get 是$.ajax的简化版 专门负责发送get请求
-    $(function () {
-        $('#name').blur(function () {
-            let page = "/checkName";
-            let value = $(this).val();
-            $.get(
-                page,//请求url
-                {"name":value},//请求携带参数
-                function (result) {//响应函数
-                    $('#checkResult').html(result);
-                }
-            )
-        })
+    //前端发送请求 后端返回单个数据 由前端接受
+    // jquery在显示数据方面 表现的非常差 后续jquery会被vue的axios
+    //替换掉
 
-    })
+    //现在我提供一个搜索功能 根据id 查询指定的商品信息
+
+
+    //最最简单的ajax请求提交方式 load
+    // $(function () {
+    //     $('#name').keyup(function () {
+    //         let page = "/checkName?name="+$(this).val();
+    //         $('#checkResult').load(page);
+        //    $('元素具体id').load(page,[data])
+        //    具体id代表用来显示ajax接受到的响应内容的元素id
+            //page代表的是发送的请求url
+            //data表示你在发送请求的时候所提交的参数
+            //data是可选项 你可以在load加载的url里面添加参数
+            //也可以直接把参数拼接在url之后
+            //这里省略了响应函数 默认将后端返回的响应结果
+            //直接写入到指定的元素之内
+
+
+
+    //     })
+    // })
+
+
+
+    //post方式提交ajax
+    // $(function () {
+    //     $('#name').keyup(function () {
+    //         let page = "/checkName";
+    //         let value = $(this).val();
+    //         $.post(
+    //             page,
+    //             {"name":value},
+    //             function (result) {
+    //                 $('#checkResult').html(result);
+    //             }
+    //         )
+    //     })
+    // })
+
+
+
+    //$.get 是$.ajax的简化版 专门负责发送get请求
+    // $(function () {
+    //     $('#name').blur(function () {
+    //         let page = "/checkName";
+    //         let value = $(this).val();
+    //         $.get(
+    //             page,//请求url
+    //             {"name":value},//请求携带参数
+    //             function (result) {//响应函数
+    //                 $('#checkResult').html(result);
+    //             }
+    //         )
+    //     })
+    //
+    // })
 
 
 

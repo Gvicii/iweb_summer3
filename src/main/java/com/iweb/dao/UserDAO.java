@@ -1,4 +1,4 @@
-package com.iweb;
+package com.iweb.dao;
 
 import com.iweb.pojo.User;
 

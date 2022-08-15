@@ -50,7 +50,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
                         <td>${category.id}</td>
                         <td><a  href="listProduct?id=${category.id}">${category.name}</a> </td>
                         <td><a href="editCategory?id=${category.id}"><button type="button" class="btn btn-default btn-primary">编辑</button></a> </td>
-                        <td><a href="deleteCategory?id=${category.id}"><button type="button" class="btn btn-default btn-danger">删除</button></a> </td>
+                        <td><button type="button" id="${category.id}"  class="btn delete btn-default btn-danger">删除</button></a> </td>
                     </tr>
                 </c:forEach>
 
@@ -66,5 +66,25 @@ pageEncoding="UTF-8" isELIgnored="false" %>
         </div>
     </div>
 </div>
+<script>
+    $(function () {
+        $('.delete').click(function () {
+           let id = $(this).attr("id");
+           let page = "/deleteCategory";
+           let $that = $(this);
+            $.get(
+                page,//请求url
+                {"id":id},//请求携带参数
+                function (result) {//响应函数
+                   if(result=="success"){
+                       $that.parent().parent().hide();
+                   }else {
+                       alert("删除失败")
+                   }
+                }
+            )
+        });
+    });
+</script>
 </body>
 </html>

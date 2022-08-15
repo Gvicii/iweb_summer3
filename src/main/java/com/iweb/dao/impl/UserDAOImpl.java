@@ -1,6 +1,6 @@
 package com.iweb.dao.impl;
 
-import com.iweb.UserDAO;
+import com.iweb.dao.UserDAO;
 import com.iweb.pojo.User;
 import com.iweb.util.DBUtil;
 
