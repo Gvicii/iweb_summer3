@@ -26,7 +26,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
                 <thead>
                 <tr>
                     <th>
-                        商品id
+                        商品图片
                     </th>
                     <th>
                         商品名称
@@ -43,18 +43,31 @@ pageEncoding="UTF-8" isELIgnored="false" %>
                     <th>
                         删除
                     </th>
+                    <th>
+                        图片管理
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${products}" var="product" varStatus="st">
                     <tr>
-                        <td>${product.id}</td>
+                        <td>
+
+                            <c:if test="${empty product.images}">
+                            <img width="100px" height="100px" src="http://39.106.106.39:8888/voice/20220815144248_lyq.jpg" class="img-thumbnail" /></td>
+
+                    </c:if>
+                            <c:if test="${!empty product.images}">
+                            <img width="100px" height="100px" src="${product.images.get(0).url}" class="img-thumbnail" /></td>
+                            </c:if>
                         <td>${product.name}</td>
                         <td>${product.price}</td>
                         <td>${product.stock}</td>
                         <td><a href="editProduct?id=${product.id}"><button type="button" class="btn btn-default btn-primary">编辑</button></a> </td>
                         <td><a href="deleteProduct?id=${product.id}"><button type="button" class="btn btn-default btn-danger">删除</button></a> </td>
+                        <td><a href="listImg?id=${product.id}"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a> </td>
                     </tr>
+
                 </c:forEach>
 
                 </tbody>
