@@ -75,7 +75,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
                         <td><a href="deleteProduct?id=${product.id}"><button type="button" class="btn btn-default btn-danger">删除</button></a> </td>
                         <td><a href="listImg?id=${product.id}"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a> </td>
                         <td><a href="setPropertyValue?id=${product.id}"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a> </td>
-<%--                                --%>
+
                     </tr>
 
                 </c:forEach>
