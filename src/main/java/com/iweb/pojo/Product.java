@@ -1,26 +1,21 @@
 package com.iweb.pojo;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
-/**
- * @author GUAN
- * @date 2022/8/12 11:14
- */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Product {
-    private int id;
     private String name;
-    private float price;
+    private String subTitle;//
+    private float originalPrice;
+    private float promotePrice;
     private int stock;
-    private int cid;
-    /**
-     * 商品关联的图片集合
-     */
-    private List<Img> images;
+    private Date createDate;
+    private Category category;
+    private int id;
+    private int reviewCount;//评价数量
+    private int saleCount;// 销量
+    private List<ProductImage> images;
 }

@@ -1,7 +1,7 @@
 package com.iweb.servlet;
 
 import com.iweb.dao.CategoryDAO;
-import com.iweb.dao.impl.CategoryDAOImpl;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 @WebServlet(urlPatterns = {"/deleteCategory"})
 public class CategoryDeleteServlet extends HttpServlet {
-    private static CategoryDAO dao = new CategoryDAOImpl();
+    private static CategoryDAO dao = new CategoryDAO();
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        获取参数id

@@ -1,7 +1,8 @@
 package com.iweb.servlet;
 
 
-import com.iweb.dao.impl.UserDAOImpl;
+
+import com.iweb.dao.UserDAO;
 import com.iweb.pojo.User;
 
 import javax.servlet.annotation.WebServlet;
@@ -23,12 +24,9 @@ public class LoginServlet extends HttpServlet {
         //接受参数
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        //创建对象 封装数据
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
+        User user = new UserDAO().get(username,password);
         //调用DAO判断登录是否成功
-        boolean isLogin = new UserDAOImpl().login(user);
+        boolean isLogin = (user!=null) ;
         if(isLogin){
 //            将该用户的数据存于session之后 用于交给后续的过滤器进行获取
             HttpSession session = req.getSession();

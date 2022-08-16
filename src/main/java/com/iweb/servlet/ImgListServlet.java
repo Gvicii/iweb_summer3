@@ -1,8 +1,8 @@
 package com.iweb.servlet;
 
-import com.iweb.dao.impl.ImgDAOImpl;
-import com.iweb.dao.impl.ProductDAOImpl;
-import com.iweb.pojo.Img;
+import com.iweb.dao.ProductDAO;
+import com.iweb.dao.ProductImageDAO;
+import com.iweb.pojo.ProductImage;
 import com.iweb.pojo.Product;
 
 import javax.servlet.ServletException;
@@ -24,9 +24,9 @@ public class ImgListServlet extends HttpServlet {
         //接受参数
         int pid = Integer.parseInt(req.getParameter("id"));
         //根据id获取对应商品
-        Product p =  new ProductDAOImpl().get(pid);
+        Product p =  new ProductDAO().get(pid);
         //根据pid获取关联的所有图片信息
-        List<Img> images = new ImgDAOImpl().select(pid);
+        List<ProductImage> images = new ProductImageDAO().select(pid);
         //将图片集合存入到商品对象的images这个引用属性中
         p.setImages(images);
         //数据存入请求中

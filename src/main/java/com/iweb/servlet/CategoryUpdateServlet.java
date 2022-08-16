@@ -1,7 +1,6 @@
 package com.iweb.servlet;
 
 import com.iweb.dao.CategoryDAO;
-import com.iweb.dao.impl.CategoryDAOImpl;
 import com.iweb.pojo.Category;
 
 import javax.servlet.ServletException;
@@ -23,9 +22,11 @@ public class CategoryUpdateServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         String name = req.getParameter("name");
 //        将数据封装成Category对象
-        Category c = new Category(id,name);
+        Category c = new Category();
+        c.setId(id);
+        c.setName(name);
         //调用DAO
-        new CategoryDAOImpl().update(c);
+        new CategoryDAO().update(c);
 //        重新访问/listServlet 获取更新之后的数据
         resp.sendRedirect("/listCategory");
     }

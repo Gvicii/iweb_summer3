@@ -1,7 +1,6 @@
 package com.iweb.servlet;
 
 import com.iweb.dao.CategoryDAO;
-import com.iweb.dao.impl.CategoryDAOImpl;
 import com.iweb.pojo.Category;
 
 import javax.servlet.ServletException;
@@ -18,7 +17,7 @@ import java.util.List;
  */
 @WebServlet(urlPatterns = {"/listCategory"})
 public class CategoryListServlet extends HttpServlet {
-    private static CategoryDAO dao  = new CategoryDAOImpl();
+    private static CategoryDAO dao  = new CategoryDAO();
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //获取我们的对应的分类集合

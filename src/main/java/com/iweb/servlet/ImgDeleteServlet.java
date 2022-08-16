@@ -1,6 +1,8 @@
 package com.iweb.servlet;
 
-import com.iweb.dao.impl.ImgDAOImpl;
+
+
+import com.iweb.dao.ProductImageDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +24,7 @@ public class ImgDeleteServlet extends HttpServlet {
         // 获取pid  用于后续的页面跳转
         int pid = Integer.parseInt(req.getParameter("pid"));
         //根据id删除对应的图片信息
-        new ImgDAOImpl().delete(id);
+        new ProductImageDAO().delete(id);
         //重新访问/listImg 获取页面最新信息
         resp.sendRedirect("/listImg?id=" + pid);
     }

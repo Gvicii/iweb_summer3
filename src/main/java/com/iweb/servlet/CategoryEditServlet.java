@@ -1,6 +1,6 @@
 package com.iweb.servlet;
 
-import com.iweb.dao.impl.CategoryDAOImpl;
+import com.iweb.dao.CategoryDAO;
 import com.iweb.pojo.Category;
 
 import javax.servlet.ServletException;
@@ -21,7 +21,7 @@ public class CategoryEditServlet extends HttpServlet {
 //       获取参数id
         int id = Integer.parseInt(req.getParameter("id"));
 //        根据id获取对应的分类信息
-        Category category = new CategoryDAOImpl().get(id);
+        Category category = new CategoryDAO().get(id);
 //        将数据设置在请求上
         req.setAttribute("category",category);
         //通过转发进行页面跳转和参数传递

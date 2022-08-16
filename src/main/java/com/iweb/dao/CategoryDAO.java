@@ -1,46 +1,141 @@
+
+
 package com.iweb.dao;
 
-import com.iweb.pojo.Category;
 
+
+import com.iweb.pojo.Category;
+import com.iweb.util.DBUtil;
+
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
-/** 分类的DAO接口
- * @author GUAN
- * @date 2022/8/11 15:42
- */
-public interface CategoryDAO {
+public class CategoryDAO {
 
-    /**增
-     * @param category 要添加的分类对象引用
-     */
-    void add(Category category);
 
-    /** 根据id删除分类
-     * @param id 分类id
-     */
-    void delete(int id);
-
-    /** 修改分类数据
-     * @param category
-     */
-    void update(Category category);
-
-    /** 根据id获取单个分类对象
-     * @param id 参数id 对应分类主键
-     * @return 根据id得到的分类对象
-     */
-    Category get(int id);
-
-    /** 用来对分类信息进行分页查询
-     * @param start 查询语句起始截止行数
-     * @param count 截取行数
-     * @return
-     */
-    List<Category> listByLimit(int start,int count);
-
-    /** 默认查询所有分类
-     * @return 查询到的所有分类集合
-     */
-    List<Category> list();
-
+ 
+    public int getTotal() {
+        int total = 0;
+        try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
+ 
+            String sql = "select count(*) from category";
+ 
+            ResultSet rs = s.executeQuery(sql);
+            while (rs.next()) {
+                total = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+ 
+            e.printStackTrace();
+        }
+        return total;
+    }
+ 
+    public void add(Category bean) {
+ 
+        String sql = "insert into category values(null,?)";
+        try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
+ 
+            ps.setString(1, bean.getName());
+ 
+            ps.execute();
+ 
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                int id = rs.getInt(1);
+                bean.setId(id);
+            }
+        } catch (SQLException e) {
+ 
+            e.printStackTrace();
+        }
+    }
+ 
+    public void update(Category bean) {
+ 
+        String sql = "update category set name= ? where id = ?";
+        try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
+ 
+            ps.setString(1, bean.getName());
+            ps.setInt(2, bean.getId());
+ 
+            ps.execute();
+ 
+        } catch (SQLException e) {
+ 
+            e.printStackTrace();
+        }
+ 
+    }
+ 
+    public void delete(int id) {
+ 
+        try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
+ 
+            String sql = "delete from category where id = " + id;
+ 
+            s.execute(sql);
+ 
+        } catch (SQLException e) {
+ 
+            e.printStackTrace();
+        }
+    }
+ 
+    public Category get(int id) {
+        Category bean = null;
+ 
+        try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
+ 
+            String sql = "select * from category where id = " + id;
+ 
+            ResultSet rs = s.executeQuery(sql);
+ 
+            if (rs.next()) {
+                bean = new Category();
+                String name = rs.getString(2);
+                bean.setName(name);
+                bean.setId(id);
+            }
+ 
+        } catch (SQLException e) {
+ 
+            e.printStackTrace();
+        }
+        return bean;
+    }
+ 
+    public List<Category> list() {
+        return list(0, Short.MAX_VALUE);
+    }
+ 
+    public List<Category> list(int start, int count) {
+        List<Category> beans = new ArrayList<Category>();
+ 
+        String sql = "select * from category order by id desc limit ?,? ";
+ 
+        try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
+ 
+            ps.setInt(1, start);
+            ps.setInt(2, count);
+ 
+            ResultSet rs = ps.executeQuery();
+ 
+            while (rs.next()) {
+                Category bean = new Category();
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                bean.setId(id);
+                bean.setName(name);
+                beans.add(bean);
+            }
+        } catch (SQLException e) {
+ 
+            e.printStackTrace();
+        }
+        return beans;
+    }
+ 
 }
+

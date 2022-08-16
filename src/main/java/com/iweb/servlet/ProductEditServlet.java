@@ -1,7 +1,6 @@
 package com.iweb.servlet;
 
 import com.iweb.dao.ProductDAO;
-import com.iweb.dao.impl.ProductDAOImpl;
 import com.iweb.pojo.Product;
 
 import javax.servlet.ServletException;
@@ -18,7 +17,7 @@ import java.io.IOException;
  */
 @WebServlet(urlPatterns = {"/editProduct"})
 public class ProductEditServlet extends HttpServlet {
-    private static ProductDAO dao = new ProductDAOImpl();
+    private static ProductDAO dao = new ProductDAO();
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

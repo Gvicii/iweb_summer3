@@ -4,15 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * @author GUAN
- * @date 2022/8/11 15:40
- * @description 类的描述和介绍
- */
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Category {
-private int id;
-private String name;
+    private String name;
+    private int id;
+    //每一个分类所对应的商品集合
+    List<Product> products;
+
 }

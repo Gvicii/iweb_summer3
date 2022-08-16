@@ -1,7 +1,6 @@
 package com.iweb.servlet;
 
 import com.iweb.dao.ProductDAO;
-import com.iweb.dao.impl.ProductDAOImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,13 +15,13 @@ import java.io.IOException;
  */
 @WebServlet(urlPatterns = {"/deleteProduct"})
 public class ProductDeleteServlet extends HttpServlet {
-    private static ProductDAO dao = new ProductDAOImpl();
+    private static ProductDAO dao = new ProductDAO();
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     //从请求中获取参数id
         int pid = Integer.parseInt(req.getParameter("id"));
         //先根据pid获取该商品对应的cid
-        int cid = dao.get(pid).getCid();
+        int cid = dao.get(pid).getCategory().getId();
         //调用dao删除对应的商品
         dao.delete(pid);
         //重定向到/listProduct 并且在发送请求的时候携带参数id

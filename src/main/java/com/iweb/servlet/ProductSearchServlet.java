@@ -1,6 +1,6 @@
 package com.iweb.servlet;
 
-import com.iweb.dao.impl.ProductDAOImpl;
+import com.iweb.dao.ProductDAO;
 import com.iweb.pojo.Product;
 import net.sf.json.JSONObject;
 
@@ -25,7 +25,7 @@ public class ProductSearchServlet extends HttpServlet {
 //        调用DAO 获取所有的商品对象 然后进行遍历
         //如果能够找到 则继续操作
         //如果找不到 则什么都不做
-        List<Product> products = new ProductDAOImpl().list();
+        List<Product> products = new ProductDAO().list();
         Product p = null;
         for(Product product:products){
             if(product.getId()==id){

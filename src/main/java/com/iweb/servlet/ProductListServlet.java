@@ -1,9 +1,8 @@
 package com.iweb.servlet;
 
-import com.iweb.dao.ImgDAO;
-import com.iweb.dao.impl.ImgDAOImpl;
-import com.iweb.dao.impl.ProductDAOImpl;
-import com.iweb.pojo.Img;
+import com.iweb.dao.ProductDAO;
+import com.iweb.dao.ProductImageDAO;
+import com.iweb.pojo.ProductImage;
 import com.iweb.pojo.Product;
 
 import javax.servlet.ServletException;
@@ -25,14 +24,14 @@ public class ProductListServlet extends HttpServlet {
         //获取参数
         int cid = Integer.parseInt(req.getParameter("id"));
         //调用DAO获取集合
-        List<Product> products = new ProductDAOImpl().list(cid);
+        List<Product> products = new ProductDAO().list(cid);
         //根据pid 获取对应的图片集合
         //将每一个商品所对应的图片集合和商品本身进行绑定
         //引入dao
-        ImgDAO imgdao = new ImgDAOImpl();
+        ProductImageDAO imgdao = new ProductImageDAO();
         for (Product p :products) {
             int pid = p.getId();
-            List<Img> images = imgdao.select(pid);
+            List<ProductImage> images = imgdao.select(pid);
             p.setImages(images);
         }
         //集合和cid存入到请求中
