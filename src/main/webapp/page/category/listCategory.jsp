@@ -20,11 +20,11 @@ pageEncoding="UTF-8" isELIgnored="false" %>
         <div class="col-md-12 column">
             <div class="page-header">
                 <h1>
-                    分类管理界面 <small>除了CRUD还有其他功能 但是 一会再说</small>
+                    分类管理界面
                 </h1>
             </div>
             <div class="page-information">
-                欢迎你,尊贵的用户${user.username}
+                欢迎你,尊贵的用户${user.name}
                 <a href="exitLogin">退出</a>
             </div>
             <table class="table table-bordered table-hover">
@@ -42,6 +42,9 @@ pageEncoding="UTF-8" isELIgnored="false" %>
                     <th>
                         删除
                     </th>
+                    <th>
+                        属性管理
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -51,6 +54,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
                         <td><a  href="listProduct?id=${category.id}">${category.name}</a> </td>
                         <td><a href="editCategory?id=${category.id}"><button type="button" class="btn btn-default btn-primary">编辑</button></a> </td>
                         <td><button type="button" id="${category.id}"  class="btn delete btn-default btn-danger">删除</button></a> </td>
+                        <td><a href="listProperty?id=${category.id}"><button type="button" class="btn btn-default btn-primary">属性管理</button></a> </td>
                     </tr>
                 </c:forEach>
 

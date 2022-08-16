@@ -79,7 +79,8 @@ public class ProductDAO {
   
     public Product get(int id) {
         Product bean = new Product();
-        try (Connection c = DBUtil.getConnection(); Statement s = c.createStatement();) {
+        try (Connection c = DBUtil.getConnection();
+             Statement s = c.createStatement();) {
             String sql = "select * from product where id = " + id;
             ResultSet rs = s.executeQuery(sql);
             if (rs.next()) {
@@ -99,6 +100,8 @@ public class ProductDAO {
                 bean.setCategory(category);
                 bean.setCreateDate(createDate);
                 bean.setId(id);
+//                负责绑定每一个商品和商品对应图片的集合
+                bean.setImages(new ProductImageDAO().select(id));
 
             }
   

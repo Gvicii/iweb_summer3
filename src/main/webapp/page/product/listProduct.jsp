@@ -1,11 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: GUAN
-  Date: 2022/8/12
-  Time: 11:38
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"
 pageEncoding="UTF-8" isELIgnored="false" %>
 <html>
@@ -32,10 +25,19 @@ pageEncoding="UTF-8" isELIgnored="false" %>
                         商品名称
                     </th>
                     <th>
-                        商品价格
+                       商品小标题
                     </th>
                     <th>
-                        商品库存
+                        商品原价
+                    </th>
+                    <th>
+                        商品优惠价
+                    </th>
+                    <th>
+                        库存
+                    </th>
+                    <th>
+                        商品创建时间
                     </th>
                     <th>
                         编辑
@@ -45,6 +47,9 @@ pageEncoding="UTF-8" isELIgnored="false" %>
                     </th>
                     <th>
                         图片管理
+                    </th>
+                    <th>
+                        属性值设置
                     </th>
                 </tr>
                 </thead>
@@ -61,11 +66,16 @@ pageEncoding="UTF-8" isELIgnored="false" %>
                             <img width="100px" height="100px" src="${product.images.get(0).url}" class="img-thumbnail" /></td>
                             </c:if>
                         <td>${product.name}</td>
-                        <td>${product.price}</td>
+                        <td>${product.subTitle}</td>
+                        <td>${product.originalPrice}</td>
+                        <td>${product.promotePrice}</td>
                         <td>${product.stock}</td>
+                        <td>${product.createDate}</td>
                         <td><a href="editProduct?id=${product.id}"><button type="button" class="btn btn-default btn-primary">编辑</button></a> </td>
                         <td><a href="deleteProduct?id=${product.id}"><button type="button" class="btn btn-default btn-danger">删除</button></a> </td>
                         <td><a href="listImg?id=${product.id}"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a> </td>
+                        <td><a href="setPropertyValue?id=${product.id}"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a> </td>
+
                     </tr>
 
                 </c:forEach>
@@ -76,10 +86,15 @@ pageEncoding="UTF-8" isELIgnored="false" %>
                 <div class="form-group">
                     <label for="name">商品名称:</label>
                     <input type="text" class="form-control" id="name" name="name" />
-                    <label for="price">商品价格:</label>
-                    <input type="text" class="form-control" id="price" name="price" />
+                    <label for="subTitle">商品小标题:</label>
+                    <input type="text" class="form-control" id="subTitle" name="subTitle" />
+                    <label for="originalPrice">商品原价:</label>
+                    <input type="text" class="form-control" id="originalPrice" name="originalPrice" />
+                    <label for="promotePrice">商品优惠价:</label>
+                    <input type="text" class="form-control" id="promotePrice" name="promotePrice" />
                     <label for="stock">商品库存:</label>
                     <input type="text" class="form-control" id="stock" name="stock" />
+
                     <input  type="hidden" class="form-control" id="cid" name="cid" value="${cid}" />
                 </div>
                 <button type="submit" class="btn btn-default">增加</button>

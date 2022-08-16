@@ -1,6 +1,8 @@
 package com.iweb.servlet;
 
+import com.iweb.dao.CategoryDAO;
 import com.iweb.dao.ProductDAO;
+import com.iweb.pojo.Product;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * @author GUAN
@@ -19,20 +22,26 @@ public class ProductAddServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //从请求携带的表单中 获取对应的数据
-/*        String name = req.getParameter("name");
-        Float price = Float.parseFloat(req.getParameter("price"));
+        String name = req.getParameter("name");
+        String subTitle = req.getParameter("subTitle");
+        float originalPrice = Float.parseFloat(req.getParameter("originalPrice"));
+        float promotePrice = Float.parseFloat(req.getParameter("promotePrice"));
         int stock = Integer.parseInt(req.getParameter("stock"));
-        int cid = Integer.parseInt(req.getParameter("cid"));*/
+        int cid = Integer.parseInt(req.getParameter("cid"));
         //将数据封装在对象中
-//        Product p = new Product();
-//        p.setName(name);
-//        p.setPrice(price);
-//        p.setStock(stock);
-//        p.setCid(cid);
-        //数据入库
-//        dao.add(p);
+        Product p = new Product();
+        p.setName(name);
+        p.setSubTitle(subTitle);
+        p.setOriginalPrice(originalPrice);
+        p.setPromotePrice(promotePrice);
+        p.setStock(stock);
+        p.setCategory(new CategoryDAO().get(cid));
+        //存入当前的日期对象
+        p.setCreateDate(new Date());
+//        数据入库
+        dao.add(p);
         //重新访问listProduct 并且携带参数cid 告诉servlet回到哪一个分类的页面下
-//        resp.sendRedirect("/listProduct?id="+cid);
+        resp.sendRedirect("/listProduct?id="+cid);
 
 
     }
